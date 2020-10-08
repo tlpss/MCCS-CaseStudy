@@ -64,23 +64,23 @@ classdef ex1
                 % Calculate the discrete-time linear model using the 
                 % Euler approximation.
                 
-                Phi = eye(5) + sampling_time*A;
-                Gamma = sampling_time*B;               
+                Phi = eye(5) + sampling
+                % Gamma = ;                
                 
             elseif strcmp(method,'c2d')
                 %%- Build continuous representation of the system with 'ss'
                 
-                Mc = ss(A,B,C,D);
+                % Mc = ss( );
                 
                 %%- Calculate the discrete-time linear model of the system 
                 % using the command 'c2d'
                 
-                Md = c2d(Mc,sampling_time ); 
+                % Md = c2d( ); 
                 
                 %%- Extract from Md, the Phi and Gamma matrices. 
                 
-                Phi = Md.A;
-                Gamma = Md.B;
+                % Phi = ;
+                % Gamma = ;
                 
                 %%-set up output of the function 
             end
