@@ -62,7 +62,7 @@ clear all, close all, clc;
     if ut.stopCondition(x0_experiments, 'getInitialState'), return; end
 
     % Generate open loop control reference 
-    [input_sequence_exps] = sol.getOpenLoopInputSignal(nominal_trajectory_sampling_time,simulation_time);
+    input_sequence_exps = sol.getOpenLoopInputSignal(nominal_trajectory_sampling_time,simulation_time);
     if ut.stopCondition(input_sequence_exps, 'getOpenLoopControlSignal'), return; end
 
     for exp_id = 1:length(input_sequence_exps)

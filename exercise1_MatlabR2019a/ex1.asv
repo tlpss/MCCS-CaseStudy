@@ -194,20 +194,14 @@ classdef ex1
             
             %%- set the control sequence to be applied in open loop for the
             %%1st experiment. 
-            params = ex1.getSystemParameters();
-            v = params(5);
-            k = params(1);
-            L = params(2);
             time_vector = 0:sampling_time:simulation_time;
-            len = size(time_vector);
-            len = len(2);
-            u1_open_loop = [ones(1,len)*v];
-            u2_open_loop = [ones(1,len).*sin(time_vector)*10]; %.*sin(time_vector)
-            uOpenLoop_experiment_1 = [time_vector', u1_open_loop', u2_open_loop'];
+            u1_open_loop = [ones(1,size(time_vector)(2))*ex1.getSystemParameters()(
+            u2_open_loop = [];
+            uOpenLoop_experiment_1 = [time_vector', u1_open_loop, u2_open_loop];
             
             %Include different values for the different experiments in a
             %cell.
-            input_control_actions_open_loop = {{uOpenLoop_experiment_1}};
+            input_control_actions_open_loop = {uOpenLoop_experiment_1};
             
             %set output of the function
             varargout = input_control_actions_open_loop;
