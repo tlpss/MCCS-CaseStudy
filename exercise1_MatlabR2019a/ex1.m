@@ -34,12 +34,12 @@ classdef ex1
             sigma_v = parameters(3);
             sigma_phi = parameters(4);
             v = parameters(5);
-            A = [[0, K*v, 0, 1, 0];[0,0,0,1,0];[0,-K^2*v,0,K*(1-L^2)/L^2, v*(K^2+L^2)/16/L^3];[0,0,0,-sigma_v,0];[0,0,0,0,-sigma_phi]];
+            A = [[0, K*v, 0, 1, 0];[0,0,v,0,0];[0,-K^2*v,0,K*(1-L^2)/L^2, v*(K^2+L^2)/16/L^3];[0,0,0,-sigma_v,0];[0,0,0,0,-sigma_phi]];
             B = zeros(5,2);
             B(4,1) = parameters(3);
             B(5,2) = parameters(4);
             C = eye(5);
-            D = zeros(5);
+            D = zeros(5,2);
             
             varargout = {A,B,C,D};
         end        
