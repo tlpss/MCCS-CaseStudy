@@ -34,7 +34,7 @@ classdef ex1
             sigma_v = parameters(3);
             sigma_phi = parameters(4);
             v = parameters(5);
-            A = [[0, K*v, 0, 1, 0];[0,0,v,0,0];[0,-K^2*v,0,K*(1-L^2)/L^2, v*(K^2+L^2)/16/L^3];[0,0,0,-sigma_v,0];[0,0,0,0,-sigma_phi]];
+            A = [[0, K*v, 0, 1, 0];[0,0,v,0,0];[0,-K^2*v,0,0, v*(K^2*L^2+1)/16/L];[0,0,0,-sigma_v,0];[0,0,0,0,-sigma_phi]];
             B = zeros(5,2);
             B(4,1) = parameters(3);
             B(5,2) = parameters(4);
@@ -121,7 +121,7 @@ classdef ex1
             x2 = zeros(1,size(x1,2));
             x3 = zeros(1,size(x1,2));
             x4 = ones(1,size(x1,2))*parameters(5);
-            x5 = ones(1,size(x1,2))*16*atan(parameters(1)/parameters(2));
+            x5 = ones(1,size(x1,2))*16*atan(parameters(1)*parameters(2));
             
             
             bar_x = [x1', x2', x3', x4', x5'];
@@ -201,16 +201,33 @@ classdef ex1
             time_vector = 0:sampling_time:simulation_time;
             len = size(time_vector);
             len = len(2);
+            % experiment 1 - reference curvature
+            %u1_open_loop = [ones(1,len)*v];
+            %u2_open_loop = [ones(1,len)*atan(k*L)*16]; %.*sin(time_vector)
+            %uOpenLoop_experiment_1 = [time_vector', u1_open_loop', u2_open_loop'];
+            
+            % experiment 1 - reference curvature * 2 
+%             u1_open_loop = [ones(1,len)*v*2];
+%             u2_open_loop = [ones(1,len)*atan(k*L)*16*5]; %.*sin(time_vector)
+%             uOpenLoop_experiment_1 = [time_vector', u1_open_loop', u2_open_loop'];
+            
+            % experiment 2 - CIRCLE
+%             u1_open_loop = [ones(1,len)*v];
+%             u2_open_loop = ones(1,len)*pi;
+%             uOpenLoop_experiment_1 = [time_vector', u1_open_loop', u2_open_loop'];
+            
+            
+            %experiment 3 - SINE
             u1_open_loop = [ones(1,len)*v];
-            u2_open_loop = [ones(1,len).*sin(time_vector)*10]; %.*sin(time_vector)
+            u2_open_loop = ones(1,len).*sin(time_vector)*10;
             uOpenLoop_experiment_1 = [time_vector', u1_open_loop', u2_open_loop'];
             
             %Include different values for the different experiments in a
             %cell.
-            input_control_actions_open_loop = {{uOpenLoop_experiment_1}};
+            input_control_actions_open_loop = {uOpenLoop_experiment_1};
             
             %set output of the function
-            varargout = input_control_actions_open_loop;
+            varargout = {input_control_actions_open_loop};
         end
         %
         
